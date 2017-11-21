@@ -15,7 +15,7 @@
  url:  http://www.silicon014.com
 #!the base hostname & protocol for your site e.g. https://www.someone.com (!!required!!)
 baseurl: /home
-title: 014
+title: Si014
 description: > #this means to ignore newlines until "nav_lists:"
   普通的neet
 
@@ -38,7 +38,7 @@ timezone: Asia/Shanghai
 
 ## Author & social ##
 author:
-  name: 014
+  name: Si014
    email:  Carbonc014@gmail.com
   # facebook:  #your Facebook username
   # twitter:  #your Twitter username
