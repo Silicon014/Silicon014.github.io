@@ -13,7 +13,7 @@
 
 ## Base settings ##
 # url:  #!the base hostname & protocol for your site e.g. https://www.someone.com (!!required!!)
-baseurl: http://www.silicon014.com/
+baseurl: https://silicon014.github.io
 title: 014
 description: > #this means to ignore newlines until "nav_lists:"
   普通的neet
