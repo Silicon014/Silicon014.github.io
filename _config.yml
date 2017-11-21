@@ -14,7 +14,7 @@
 ## Base settings ##
  url:  http://www.silicon014.com
 #!the base hostname & protocol for your site e.g. https://www.someone.com (!!required!!)
-baseurl: /home
+baseurl: /
 title: Si014
 description: > #this means to ignore newlines until "nav_lists:"
   普通的neet
@@ -29,11 +29,11 @@ nav_lists:
     url: /about.html
 
 ## GitHub repository (if the site is hosted by GitHub) ##
- repository: silicon014/silicon014.github.io
- repository_tree:  master
+# repository: silicon014/silicon014.github.io
+# repository_tree:  master
 
 ## Language & timezone ##
-lang: zh #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
+lang: zh-Hans #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
 timezone: Asia/Shanghai
 
 ## Author & social ##
