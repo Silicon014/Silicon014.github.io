@@ -14,9 +14,9 @@
 ## Base settings ##
 # url:  #!the base hostname & protocol for your site e.g. https://www.someone.com (!!required!!)
 baseurl: /
-title: Someone's blog
+title: Si014
 description: > #this means to ignore newlines until "nav_lists:"
-  Someone's Blog
+  Silicon014
 
 nav_lists:
   # - title: About
@@ -33,24 +33,24 @@ paths:
   rss:  /feed.xml
 
 ## GitHub repository (if the site is hosted by GitHub) ##
-repository: someone/someone.github.io
+repository: silicon014/silicon014.github.io.git
 repository_tree: master
 
 ## Language & timezone ##
-lang: en #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
+lang: zh #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
 timezone: Asia/Shanghai
 
 ## Author & social ##
 author:
-  name: Someone
-  email: someone@somemail.com  #your Email address e.g. someone@site.com
-  facebook: someone  #your Facebook username
-  twitter: someone  #your Twitter username
-  github: someone  #your GitHub username
-  googleplus: someone  #your Google+ username
-  weibo: someone  #your Weibo username
-  douban: someone  #your Douban username
-  linkedin: someone  #your Linkedin username
+  name: Si014
+  email: Carbonc014@gmail.com  #your Email address e.g. someone@site.com
+  facebook:   #your Facebook username
+  twitter:   #your Twitter username
+  github: silicon014  #your GitHub username
+  googleplus:   #your Google+ username
+  weibo:   #your Weibo username
+  douban:   #your Douban username
+  linkedin:   #your Linkedin username
 
 ## Comment system (Disqus) ##
 disqus:
