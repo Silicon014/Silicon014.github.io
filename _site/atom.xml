@@ -4,13 +4,22 @@
  <title>赫映 's blog</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-11-21T15:20:18+08:00</updated>
+ <updated>2017-11-23T16:42:35+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>赫映</name>
    <email>Carbonc014@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>焦躁不安</title>
+   <link href="http://localhost:4000/2017/11/23/%E7%83%A6%E8%BA%81%E4%B8%8D%E5%AE%89/"/>
+   <updated>2017-11-23T00:00:00+08:00</updated>
+   <id>http://localhost:4000/2017/11/23/烦躁不安</id>
+   <content type="html">&lt;p&gt;不知道行不行……&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>测试</title>
