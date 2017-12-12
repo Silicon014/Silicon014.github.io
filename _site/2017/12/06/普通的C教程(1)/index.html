@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      普通的C教程(1) &middot; 赫映 's blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>普通的neet</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v0.1.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">赫映 's blog</a>
+            <small>silicon014</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">普通的C教程(1)</h1>
+  <span class="post-date">06 Dec 2017</span>
+  <h1 id="c1">普通的C教程（1）</h1>
+
+<h2 id="section">目录</h2>
+
+<ul>
+  <li><a href="#install">软件安装</a></li>
+  <li><a href="#firstsample">第一个程序</a></li>
+</ul>
+
+<p><span id="install"></span>
+首先，我们需要一个用来编程的环境。</p>
+
+<h2 id="section-1">软件安装</h2>
+
+<h3 id="windows">windows</h3>
+
+<p>相信大多数人在电脑上安装的都是windows操作系统。
+首先需要确认，电脑上安装的操作系统是windows10，还是其他版本。
+对于windows10操作系统，可以安装bash on windows；
+其他版本下，则需要安装虚拟机。</p>
+
+<h4 id="windows10">windows10</h4>
+
+<p>安装bash on windows需要先将系统升级到最新版本，否则下面的教程可能不适用。
+具体的说，需要系统版本号在15063以上。</p>
+
+<ul>
+  <li>安装linux子系统</li>
+</ul>
+
+<p>首先，以管理员模式打开powershell。
+具体的方法是在开始菜单中搜索并找到powershell，右键选择以管理员权限运行。
+之后在打开的命令行中输入：</p>
+
+<p><code class="highlighter-rouge">
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+</code></p>
+
+<p>在输入这长长的一串之后回车执行。一段时间后，执行完毕时会提示需要重启。
+这时依提示重启。</p>
+
+<p>重新启动完毕后打开windows应用商店，在应用商店中搜索ubuntu并安装。
+当然你也可以安装ubuntu以外的linux发行版，
+只要善用搜索引擎学习和寻找教程的话。</p>
+
+<p>安装好后开始菜单中会多出一个名为ubuntu的程序，这是linux子系统。
+bash是基于这个子系统的命令行。
+以后的编程学习可以在这个子系统上完成。
+但首先我们需要对这个子系统进行基本的调教。</p>
+
+<ul>
+  <li>子系统内软件的安装</li>
+</ul>
+
+<p>点击ubuntu图标，运行bash。这时ubuntu子系统开始安装，只要等待就好。安装过程中会分别提示输入用户名和密码以创建新用户，这里只需要输入简单好记的密码就够了。</p>
+
+<p>安装完成后出现提示符，大概是这样：</p>
+
+<blockquote>
+  <p>username@DESKTOP-UBAONDB:~$</p>
+</blockquote>
+
+<p>其中，username是之前输入的用户名。@DESKTOP-UBAONDB是默认的主机名，
+~是当前路径，符号~代表现在处于用户的主目录下。$叫做命令提示符，提示在之后输入的部分是bash命令。</p>
+
+<p>首先，需要配置软件源。这里推荐163源，可以用以下命令配置：</p>
+
+<p><code class="highlighter-rouge">
+wget https://raw.githubusercontent.com/Silicon014/backups/master/sources.list.xenial
+sudo mv sources.list.xenial /etc/apt/sources.list
+sudo apt update
+</code></p>
+
+<p>sudo命令表示指令需要root权限。此时系统会提示输入密码。
+输入之前设置的用户密码即可。
+第一句命令从指定的地址下载文件sources.list.xenial，第二句以文件覆盖系统的软件源列表，第三句更新软件信息。执行完毕后，系统会提示有若干软件包需要更新，这时可以暂时先不更新。更新的命令是：</p>
+
+<p><code class="highlighter-rouge">
+sudo apt upgrade
+</code></p>
+
+<p>接着就是正式的软件安装了。输入命令：</p>
+
+<p><code class="highlighter-rouge">
+sudo apt install vim vim-youcompleteme
+</code></p>
+
+<p>命令执行过程中会提示是否安装。输入y后回车确定。</p>
+
+<ul>
+  <li>配置vim</li>
+</ul>
+
+<p>这里只推荐添加行号。输入命令：</p>
+
+<p><code class="highlighter-rouge">
+vim .vimrc
+</code></p>
+
+<p>命令打开vim编辑器，编辑的对象是新文件.vimrc。
+vim是常用的命令行编辑器，也是最好的编辑器之一。按i进入插入模式，输入</p>
+
+<p><code class="highlighter-rouge">
+set number
+</code></p>
+
+<p>然后按Esc键退出模式。在vim编辑器中，输入</p>
+
+<p><code class="highlighter-rouge">
+:wq
+</code></p>
+
+<p>保存退出。</p>
+
+<p>vim的显著特征是所谓的<em>模式</em>。
+进入vim时，程序处于命令模式，
+这时输入并不被解释为文本的一部分，
+而是解释为对vim编辑器的命令。
+按下i可以切换到插入模式。
+此时vim编辑器的左下角会显示<code class="highlighter-rouge">-- INSERT --</code>。
+只有在插入模式下vim才能像普通编辑器一样使用。
+要退出插入模式，只需要按下Esc。
+这样的设计可以在命令模式下提供大量强大的快捷键和快捷键组合。</p>
+
+<p>在.vimrc文件中添加的<code class="highlighter-rouge">set number</code>可以使vim默认显示行号。打开vim，可以看到在左上角光标的左侧出现数字1，代表第一行。如果输入</p>
+
+<p><code class="highlighter-rouge">
+set nonumber
+</code></p>
+
+<p>这时可以关闭行号显示。输入<code class="highlighter-rouge">:q</code>退出vim。如果你不小心按i进入了插入模式而且输入了什么的话，vim编辑器会警告并且拒绝退出。此时需要输入<code class="highlighter-rouge">:q!</code>以强制退出。</p>
+
+<p>vim还可以有更多的自定义设置。如果你想了解更多东西的话，可以去搜索vim教程之类的。</p>
+
+<h4 id="windows-1">其他windows</h4>
+
+<p>对于其他windows，建议安装虚拟机。常用的虚拟机软件有virtualbox和VMware。这里以virtualbox为例。如果你想使用VMware，可以自行搜索VMware教程。</p>
+
+<p>首先，从官网下载并安装virtualbox。这里给出参考下载地址：</p>
+
+<blockquote>
+  <p>http://download.virtualbox.org/virtualbox/5.2.2/VirtualBox-5.2.2-119230-Win.exe</p>
+</blockquote>
+
+<p>安装后打开程序，单击New以新建虚拟机。依次选择linux/ubuntu 64位，内存大小2048MB，创建新的虚拟硬盘，VDI磁盘映像，8GB，固定大小，然后等待执行完毕。</p>
+
+<p>同时，需要下载linux安装镜像。这里只推荐Ubuntu，如果你想尝试其他的发行版也可以，但记得在创建虚拟机时选择对应的选项。Ubuntu最新的稳定版本是16.04，虽然最新版本号已经是17.10，但这个版本容易出现bug，而且保质期更短。同样给出参考下载地址：</p>
+
+<blockquote>
+  <p>http://releases.ubuntu.com/16.04/ubuntu-16.04.3-desktop-amd64.iso</p>
+</blockquote>
+
+<p>等待下载完成。下载完毕后，在virtualbox中选中之前新建的虚拟机，单击Setting。
+在setting中选择侧边栏的storage，选中光驱后在右侧的选项卡中选择加载光盘。
+这里选择你之前下载的光盘镜像。选好后，点击右下角的确定退出。</p>
+
+<p>双击运行虚拟机，进入ubuntu的系统安装界面。安装系统的部分参考下面对Linux系统统的说明。最后，安装完毕之后记得回到setting，在同样的地方选择弹出虚拟光盘。</p>
+
+<h3 id="linux">linux</h3>
+
+<p>假如你已经安装好了linux,比如ubuntu发行版，那么只要参考上面针对bash on windows的教程即可。
+特别地，在安装vim部分，如果你想试试其他的编辑器，你也可以选择emacs：</p>
+
+<p><code class="highlighter-rouge">
+sudo apt install emacs
+</code></p>
+
+<p>emacs是最强大的编辑器，但同时也是配置起来最麻烦和学习起来最复杂的。
+这里没有emacs的教程，因为我不会用emacs。</p>
+
+<h4 id="linux-1">刻录启动盘，以及安装linux</h4>
+
+<p>如果你想安装linux，首先你需要确保有足够的硬盘空间。推荐安装在SSD上，
+因为linux并不需要太大的空间。
+如果有些犹豫，或者害怕自己会弄坏电脑以及原有的数据，请选择虚拟机。</p>
+
+<p>…待续</p>
+
+<p><span id="firstsample"></span></p>
+
+<h2 id="section-2">第一个程序</h2>
+
+<p><code class="highlighter-rouge">
+//firstsample.c -- 第一个程序
+int main(void)
+{
+	int a = 1;
+	int b = 1;
+	return a + b;
+}
+</code></p>
+
+<p>这是一个最简单的程序。计算机先加载函数main和常数1，然后调用函数main。
+main函数是一个简单的加法，它用常数1先初始化一个变量a，再初始化一个变量b，
+最后把二者相加，返回相加的结果。在bash下，可以用命令<code class="highlighter-rouge">echo $?</code>
+查看返回值：</p>
+
+<blockquote>
+  <p>$ ./firstsample<br />
+$ echo $?<br />
+2  <br />
+$</p>
+</blockquote>
+
+<p>1+1=2。这个程序完成了一次加法,仅此而已。你可以用vim编辑器输入代码,
+得到源代码文件firstsample.c，然后用</p>
+
+<p><code class="highlighter-rouge">
+$ gcc firstsample.c -o firstsample
+</code></p>
+
+<p>命令编译得到程序firstsample。</p>
+
+<p>linux系统自带的编译器是gcc。如果提示找不到命令，使用
+<code class="highlighter-rouge">sudo apt install gcc</code>来安装gcc编译器。</p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2017/12/12/%E6%99%AE%E9%80%9A%E7%9A%84C%E6%95%99%E7%A8%8B/">
+            普通的C教程
+            <small>12 Dec 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2017/12/11/emacs%E7%AC%94%E8%AE%B0/">
+            emacs笔记
+            <small>11 Dec 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2017/12/09/Tex%E6%B5%8B%E8%AF%95/">
+            TEX测试
+            <small>09 Dec 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

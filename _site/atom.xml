@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>赫映 's blog</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2017-11-23T16:42:35+08:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://lanyon.getpoole.com/atom.xml" rel="self"/>
+ <link href="http://lanyon.getpoole.com/"/>
+ <updated>2017-12-13T05:46:41+08:00</updated>
+ <id>http://lanyon.getpoole.com</id>
  <author>
    <name>赫映</name>
    <email>Carbonc014@gmail.com</email>
@@ -13,19 +13,702 @@
 
  
  <entry>
+   <title>普通的C教程</title>
+   <link href="http://lanyon.getpoole.com/2017/12/12/%E6%99%AE%E9%80%9A%E7%9A%84C%E6%95%99%E7%A8%8B/"/>
+   <updated>2017-12-12T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/12/普通的C教程</id>
+   <content type="html">&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#preper&quot;&gt;准备&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#function&quot;&gt;函数&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#variable&quot;&gt;变量&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#stack&quot;&gt;栈&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#array&quot;&gt;数组&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pointer&quot;&gt;指针&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#memory&quot;&gt;内存&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#type&quot;&gt;类型&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;span id=&quot;preper&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;准备&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;基本的计算机知识&lt;/h3&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;1. 抽象&lt;/h4&gt;
+
+&lt;p&gt;说到计算机，第一印象应该是所谓的PC、台式机，然后想到的可能是笔记本电脑，可能还有新闻和影视作品中的各种超级计算机；稍微思考，计算机还包括了手机、平板电脑和其他复杂而所知甚少的电子产品。&lt;/p&gt;
+
+&lt;p&gt;计算机是什么这个问题，和计算机科学是什么一样难以回答。唯一便捷的理解就是计算机是一种抽象，像物理模型那样的抽象。如果一个系统满足这个抽象的所有条件，那么它就是计算机。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;2. 硬件组成&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;总线&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总线是贯穿系统的通道，数据通过总线在计算机的各部分之间交通。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I/O&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I/O 是输入(Input)和输出(Output)的缩写。计算机中，包括显卡/显示器、磁盘、键盘和鼠标乃至互联网等等都是I/O设备。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;主存&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主存是数据存放的部分。一般指内存，也可以是CPU的缓存。主存也储存CPU指令。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CPU&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CPU是中央处理器的缩写。处理器的核心是程序计数器(PC)，程序计数器指示处理器执行的指令。指令有：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;从主存加载一个字&lt;/li&gt;
+  &lt;li&gt;把一个字保存到主存&lt;/li&gt;
+  &lt;li&gt;对两个字做运算&lt;/li&gt;
+  &lt;li&gt;加载下一段指令&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比如，如果让计算机计算1+1，过程是这样的：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;从主存加载1、1&lt;/li&gt;
+  &lt;li&gt;对1、1使用加法，得到2&lt;/li&gt;
+  &lt;li&gt;把2保存到主存&lt;/li&gt;
+  &lt;li&gt;结束，开始执行别的指令&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;程序&lt;/h4&gt;
+
+&lt;p&gt;总的来说程序就是一堆数据和CPU指令。源代码不是程序，要让源代码成为程序需要经过编译(编译器)或者解释(解释器)。通常，C语言通过编译生成程序。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-6&quot;&gt;操作系统&lt;/h4&gt;
+
+&lt;p&gt;操作系统的主要功能是管理硬件、向其他应用程序提供简单清晰的计算机抽象。每个程序都需要一个包括CPU、主存、IO等等硬件的完整计算机系统，但实际的东西往往比这个简单模型复杂的多，这就需要操作系统的管理。&lt;/p&gt;
+
+&lt;h5 id=&quot;section-7&quot;&gt;进程&lt;/h5&gt;
+
+&lt;p&gt;一个进程就是一套操作系统提供的计算机抽象，程序在进程中运行。&lt;/p&gt;
+
+&lt;h5 id=&quot;section-8&quot;&gt;虚拟内存&lt;/h5&gt;
+
+&lt;p&gt;虚拟内存是为进程提供的主存抽象。&lt;/p&gt;
+
+&lt;h5 id=&quot;section-9&quot;&gt;文件&lt;/h5&gt;
+
+&lt;p&gt;文件是对IO的抽象。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-10&quot;&gt;总结&lt;/h4&gt;
+
+&lt;p&gt;计算机是层层抽象的结果。&lt;/p&gt;
+
+&lt;p&gt;一台复杂的计算机并不完全符合之前提出的计算机模型，但计算机制造者保证计算机能同模型一样行事。也就是说，电脑和计算机之间的关系就像时钟和时间的关系。同时，为了运行和管理各种不同的程序，计算机往往还需要操作系统来分配计算机的硬件资源，这是又一层抽象。程序运行在抽象的进程中。&lt;/p&gt;
+
+&lt;p&gt;编程本身也是一种抽象。编程语言是编程中一套系统的抽象方法。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-11&quot;&gt;相关推荐&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://space.bilibili.com/5385034?spm_id_from=333.338.viewbox_report.5#/channel/detail?cid=16059&quot;&gt;10分钟速成课：计算机科学&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;编程软件的推荐&lt;/h3&gt;
+
+&lt;p&gt;推荐使用emacs编辑器。对于linux和macOS，假设你已经知道如何使用终端。
+这里以windows下的bash on ubuntu on windows为例，详述具体的过程。&lt;/p&gt;
+
+&lt;h4 id=&quot;bash-on-ubuntu-on-windows&quot;&gt;bash on ubuntu on windows的安装&lt;/h4&gt;
+
+&lt;p&gt;首先在控制面板中开启适用于Linux的windows子系统，具体流程如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;找到控制面板中的“程序和功能”，打开侧边栏的“启用或关闭计算机功能”&lt;/li&gt;
+  &lt;li&gt;在下拉选项中找到并勾选“适用于Linux的windows子系统”。&lt;/li&gt;
+  &lt;li&gt;等待，然后按提示重启。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;然后在软件商店中安装ubuntu。这里可能需要Microsoft账户，没有的话就注册个。
+安装完成后，在开始菜单中启动ubuntu。这时应用程序会进行初始化的配置，期间需要你创建一个子系统用户，依次输入用户名、密码、重复密码即可。
+配置完成后，Ubuntu子系统即可正常使用。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-13&quot;&gt;必要的设置&lt;/h4&gt;
+
+&lt;p&gt;同样以ubuntu子系统的bash on buntu on windows为例。对于其他系统，确保已经安装了emacs和clang编译器。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;外观、字体&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这是最重要的设置部分。在顶部栏右键，选择属性，这里可以修改窗口布局、字体和配色等。需要注意的是,bash需要支持CP936字符集的字体，&lt;a href=&quot;https://www.zhihu.com/question/46967766/answer/240205980&quot;&gt;参考&lt;/a&gt;。推荐安装Microsoft Yahei Mono，系统字体的安装方法请自行百度。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装emacs和clang：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt install emacs clang
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在命令行中输入。这一命令需要输入密码以验证身份，就是之前设置的的密码。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>emacs笔记</title>
+   <link href="http://lanyon.getpoole.com/2017/12/11/emacs%E7%AC%94%E8%AE%B0/"/>
+   <updated>2017-12-11T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/11/emacs笔记</id>
+   <content type="html">&lt;h4 id=&quot;section&quot;&gt;标记说明&lt;/h4&gt;
+
+&lt;p&gt;c-: Ctrl&lt;br /&gt;
+m-: Alt&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;移动光标&lt;/h4&gt;
+
+&lt;p&gt;上: c-p (上一行prev line)&lt;br /&gt;
+下: c-n (下一行next line)&lt;br /&gt;
+左: c-b (向后backward) m-b (按词)&lt;br /&gt;
+右: c-f (向前forward) m-f  (按词)&lt;/p&gt;
+
+&lt;p&gt;行初: c-a (Home键)&lt;br /&gt;
+句初: m-a&lt;br /&gt;
+行末: c-e (End键)&lt;br /&gt;
+句末: m-e&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;翻页&lt;/h4&gt;
+
+&lt;p&gt;上翻页: m-v&lt;br /&gt;
+下翻页: c-v&lt;br /&gt;
+居中:   c-l&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;删除/恢复&lt;/h4&gt;
+
+&lt;p&gt;删除单字: c-d (Del键)&lt;br /&gt;
+删除至词末: m-d&lt;br /&gt;
+删除至句末: m-k (Kill)&lt;br /&gt;
+删除至行末: c-k （Kill)&lt;/p&gt;
+
+&lt;p&gt;恢复: c-x u (撤销)&lt;/p&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;保存/退出&lt;/h4&gt;
+
+&lt;p&gt;保存: c-x c-s&lt;br /&gt;
+退出: c-x c-c&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>TEX测试</title>
+   <link href="http://lanyon.getpoole.com/2017/12/09/Tex%E6%B5%8B%E8%AF%95/"/>
+   <updated>2017-12-09T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/09/Tex测试</id>
+   <content type="html">&lt;h3 id=&quot;section&quot;&gt;文本&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;TEX&lt;/script&gt;
+  &lt;/li&gt;
+  &lt;li&gt;$hello, world$&lt;/li&gt;
+  &lt;li&gt;$\mbox{hello, world}$&lt;/li&gt;
+  &lt;li&gt;$f(x)=0$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;上下标&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;$f(x)=x^2+x^{10}$&lt;/li&gt;
+  &lt;li&gt;$H_2O$&lt;/li&gt;
+  &lt;li&gt;$C_{60}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;希腊字母&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;$\alpha$&lt;/li&gt;
+  &lt;li&gt;$\beta$  &lt;br /&gt;
+$\cdots$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;符号&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;$\sum$&lt;/li&gt;
+  &lt;li&gt;$\sqrt{10000} \sqrt[9]{10000}$&lt;/li&gt;
+  &lt;li&gt;$\ldots \cdots$&lt;/li&gt;
+  &lt;li&gt;${}$&lt;/li&gt;
+  &lt;li&gt;$\frac{a}{b}$&lt;/li&gt;
+  &lt;li&gt;$\to$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;结构&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;$123\123$&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>daily log</title>
+   <link href="http://lanyon.getpoole.com/2017/12/08/daily-log/"/>
+   <updated>2017-12-08T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/08/daily log</id>
+   <content type="html">&lt;h3 id=&quot;section&quot;&gt;1&lt;/h3&gt;
+&lt;p&gt;快年末了。&lt;br /&gt;
+时间过的真快，自己做的事又太少。
+有的时候总是觉得无所事事，又有太多事要做。
+自己行动的意愿，比起以前大大降低了。
+让人失望的东西太多，无聊的事情太多。
+所有的事情都是一环接一环的，要么接受，要么全盘放弃。能扯断链条的人太少了。&lt;/p&gt;
+
+&lt;p&gt;首先要精神上独立，然后要物质上独立。之后先放弃物质的独立，再放弃精神的独立。人的一生就这么过完了。这么看，人自身也是这链条的一部分。没有自闭的语言，因此也就没有独立的个体。如此看来，独立不独立，独特不独特，都仅仅是片面的东西。&lt;/p&gt;
+
+&lt;p&gt;总有人相信能与这长长的链条妥协。他们穿梭于其间，巧妙施力，在一个个节点之间周折。但他们所不知道的是一切只是一场演出，他们小心翼翼地完成所有动作，但舞台总会落幕，戏子终将离场，最后什么也剩不下。然而没人是观众，表演者即是观察者，一切界限都是模糊的。锁链也被自己锁着。作为锁链的一环，一切都没有意义，一切皆无。这虚无是彻底的。&lt;/p&gt;
+
+&lt;p&gt;人的一切行为都可以被诠释为锁链中的挣扎。链条的牢固与紧绷却正来自于环节之间的碰撞。世界是愚蠢的，但这愚蠢毫无意义。没人在说，没人在听。&lt;/p&gt;
+
+&lt;p&gt;人不能永生。在这断然的否定中，失去的不仅是希望，还是构成希望的基础。希望不存在了，同时绝望也不存在。所有的词都褪色，所有的人都面目可憎。世界正在封闭，一切都在闭环，但只有少数的人能触到可怕的边际。但我宁愿相信自己身处于旧世界。将被代谢掉的是开始凋零的一切，也是人的绝大部分。&lt;/p&gt;
+
+&lt;p&gt;世界中央的人是幸福的——从统计学上来说，他们活下去的几率更大。&lt;/p&gt;
+
+&lt;p&gt;但新的在哪里？崭新的一切在哪里？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2&lt;/h3&gt;
+
+&lt;p&gt;人的本质既不是语言，也不是实体，而是一种抽象的结构。人存在的全部在于对这一结构的描述。因此，最好的行为方式是表述并传递这一结构。&lt;/p&gt;
+
+&lt;p&gt;描述的过程就是人的一切，其中包括人的行动。为了考察所谓目的，首先需要分析结构本身。向外，结构可被分析为三方面：信息、知识和工具。向内，结构可等价于数据。毫无疑问，这种划分方式是粗糙的。虽然方法粗糙，但总的来说益处大于不利之处。&lt;/p&gt;
+
+&lt;p&gt;进行定义的行为总是必要的。在自然语言中，进行定义的工具是意识形态。一族意识形态往往确定了对价值的偏好。这一偏好取决于效率。只要自然语言存在，意识形态永恒存在。&lt;/p&gt;
+
+&lt;p&gt;意识形态就是实体。这是因为定义的局限性。即使在形式语言中，由于目前没有独立的形式语言体系，意识形态仍如影随形。在这种不完善的情况下，可以说语言远比实体对结构本身重要。首要重要的是所谓knowledge，即是知识和信息。由于实体暂时降到了次要的地位，在目前阶段，可以以知识的工具性代替工具本身，于是剩下的是知识、以及信息或数据。&lt;/p&gt;
+
+&lt;p&gt;在这种拟合下，可以得到较好的方案。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>使用git</title>
+   <link href="http://lanyon.getpoole.com/2017/12/07/%E4%BD%BF%E7%94%A8git/"/>
+   <updated>2017-12-07T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/07/使用git</id>
+   <content type="html">&lt;p&gt;只是一份备忘录。&lt;/p&gt;
+
+&lt;p&gt;1.配置用户名，邮箱等&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git config –global -e&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2.添加ssh-key&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;生成ssh-key&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ssh-keygen -t rsa -C “yourname@email.com”
+然后按N次回车&lt;br /&gt;
+- 当提示找不到命令时&lt;br /&gt;
+&amp;gt; pacman -S openssh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;添加到github之类的&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;xsel -b &amp;lt; .ssh/id_rsa.pub&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;然后粘贴到&lt;a href=&quot;https://github.com/settings/ssh/new&quot;&gt;这里的&lt;/a&gt;key一栏中，
+选择Add SSH key。&lt;/p&gt;
+
+&lt;p&gt;3.新建仓库，添加文件和提交改动&lt;/p&gt;
+
+&lt;p&gt;在文件夹下建立一个空的git仓库：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git init&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;添加所有文件到git仓库：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git add –all&lt;br /&gt;
+或者可以指定添加某个文件：
+&amp;gt; git add &amp;lt;文件名&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;提交commit：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git commit -m “&amp;lt;name&amp;gt;”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;4.同步&lt;/p&gt;
+
+&lt;p&gt;增添同步端：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在github上新建仓库：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;首先进入&lt;a href=&quot;https://github.com/new&quot;&gt;新建仓库&lt;/a&gt;的页面，在Repository name下方输入
+你想为仓库取的名字，点击绿色的Create repository确定。确定后跳转至仓库页。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;关联至本地仓库&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;新建的仓库为空，按提示复制仓库的ssh路径。之后在本地仓库下输入&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git remote add origin &amp;lt;之前复制的ssh路径&amp;gt;&lt;br /&gt;
+输入错误时，用以下命令删除：&lt;br /&gt;
+&amp;gt; git remote remove origin&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;本地同步到github&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git push origin master&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;将把本地文件上传至github。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;github同步到本地&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git pull origin master&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;将把github保存的文件下载到本地。&lt;/p&gt;
+
+&lt;p&gt;5.下载仓库&lt;/p&gt;
+
+&lt;p&gt;在github网站上的仓库页点击绿色的Clone or download，
+复制ssh路径，然后在保存各种项目的目录下输入&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git clone &amp;lt;复制的路径&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果是别人的仓库，则在Clone or download弹出框的右上角点击use html选择复制html路径。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>YCM</title>
+   <link href="http://lanyon.getpoole.com/2017/12/07/YCM/"/>
+   <updated>2017-12-07T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/07/YCM</id>
+   <content type="html">&lt;p&gt;YouCompleteMe这个插件，想想还是不装算了。代码补全虽然实用，但并没有很大的必要。我又不是记不住函数名之类的人。另外，那个选项框太难看，在vim中跳出一个代码补全的选项框更是有一种莫名其妙的滑稽感。&lt;/p&gt;
+
+&lt;p&gt;所以我折腾了好一阵子YCM这个插件，最后还是没有用上。最多实际应用上了代码缩进而已。安装是一方面，配置和使用是另一方面。确实，手动编译之类很麻烦；但写配置文件更麻烦。而且绕了一圈，尝试了各种教程的方法后，我最后还是用的github上说明的方法，即python脚本自动编译。虽然我不打算用这个插件了，但好歹还是把安装方法整理一下吧。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;错误示范&lt;/h2&gt;
+
+&lt;p&gt;首先我按照官方文档的说明，把项目clone到&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.vim/bundle/&lt;/code&gt;	下；接着检查并安装编译所需的软件：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt install build-essential cmake  
+sudo apt install python-dev python3-dev
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;然后在目录&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.vim/bundle/YouCompleteMe&lt;/code&gt;下执行&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+./install.py --clang-completer
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;按照说明，这时就应该编译完毕了。但这时程序出现错误，执行卡在了&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;downloading clang 5.0&lt;br /&gt;
+&amp;gt; 大概是这样，记不清了&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这样的一行上，许久不见动静。我觉得可能是网络的原因——当然只是猜测。
+反正是，YouCompleteMe插件不能获取clang，因此也就无法成功编译安装。
+一开始我以为是系统没有安装合适的版本，于是用apt安装了clang 5。
+可是再次执行的时候还是在downloading clang 5.0停了下来。这一次，安装
+编译的过程没有彻底静止，下载在以1%，2%的速度几分钟几分钟地缓慢进行。
+不过，在我等了不知道多久之后，插件最终还是安装失败了。这一次，
+提示的不是缺少clang，而是缺少libclang这个库。&lt;/p&gt;
+
+&lt;p&gt;如此反复。我又去装了libclang，结果还是downloading clang 5.0。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;结果&lt;/h2&gt;
+
+&lt;p&gt;最后的解决方法是在执行install.py时加上参数&lt;code class=&quot;highlighter-rouge&quot;&gt;--system-libclang --system-boost&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+./install.py --clang-completer --system-libclang --system-boost
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;然后就可以了。虽说不建议用系统自带的libclang库，但我这也是没办法之举。&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>普通的C教程(1)</title>
+   <link href="http://lanyon.getpoole.com/2017/12/06/%E6%99%AE%E9%80%9A%E7%9A%84C%E6%95%99%E7%A8%8B(1)/"/>
+   <updated>2017-12-06T00:00:00+08:00</updated>
+   <id>http://lanyon.getpoole.com/2017/12/06/普通的C教程(1)</id>
+   <content type="html">&lt;h1 id=&quot;c1&quot;&gt;普通的C教程（1）&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#install&quot;&gt;软件安装&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#firstsample&quot;&gt;第一个程序&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span id=&quot;install&quot;&gt;&lt;/span&gt;
+首先，我们需要一个用来编程的环境。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;软件安装&lt;/h2&gt;
+
+&lt;h3 id=&quot;windows&quot;&gt;windows&lt;/h3&gt;
+
+&lt;p&gt;相信大多数人在电脑上安装的都是windows操作系统。
+首先需要确认，电脑上安装的操作系统是windows10，还是其他版本。
+对于windows10操作系统，可以安装bash on windows；
+其他版本下，则需要安装虚拟机。&lt;/p&gt;
+
+&lt;h4 id=&quot;windows10&quot;&gt;windows10&lt;/h4&gt;
+
+&lt;p&gt;安装bash on windows需要先将系统升级到最新版本，否则下面的教程可能不适用。
+具体的说，需要系统版本号在15063以上。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装linux子系统&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;首先，以管理员模式打开powershell。
+具体的方法是在开始菜单中搜索并找到powershell，右键选择以管理员权限运行。
+之后在打开的命令行中输入：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在输入这长长的一串之后回车执行。一段时间后，执行完毕时会提示需要重启。
+这时依提示重启。&lt;/p&gt;
+
+&lt;p&gt;重新启动完毕后打开windows应用商店，在应用商店中搜索ubuntu并安装。
+当然你也可以安装ubuntu以外的linux发行版，
+只要善用搜索引擎学习和寻找教程的话。&lt;/p&gt;
+
+&lt;p&gt;安装好后开始菜单中会多出一个名为ubuntu的程序，这是linux子系统。
+bash是基于这个子系统的命令行。
+以后的编程学习可以在这个子系统上完成。
+但首先我们需要对这个子系统进行基本的调教。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;子系统内软件的安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;点击ubuntu图标，运行bash。这时ubuntu子系统开始安装，只要等待就好。安装过程中会分别提示输入用户名和密码以创建新用户，这里只需要输入简单好记的密码就够了。&lt;/p&gt;
+
+&lt;p&gt;安装完成后出现提示符，大概是这样：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;username@DESKTOP-UBAONDB:~$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其中，username是之前输入的用户名。@DESKTOP-UBAONDB是默认的主机名，
+~是当前路径，符号~代表现在处于用户的主目录下。$叫做命令提示符，提示在之后输入的部分是bash命令。&lt;/p&gt;
+
+&lt;p&gt;首先，需要配置软件源。这里推荐163源，可以用以下命令配置：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+wget https://raw.githubusercontent.com/Silicon014/backups/master/sources.list.xenial
+sudo mv sources.list.xenial /etc/apt/sources.list
+sudo apt update
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;sudo命令表示指令需要root权限。此时系统会提示输入密码。
+输入之前设置的用户密码即可。
+第一句命令从指定的地址下载文件sources.list.xenial，第二句以文件覆盖系统的软件源列表，第三句更新软件信息。执行完毕后，系统会提示有若干软件包需要更新，这时可以暂时先不更新。更新的命令是：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt upgrade
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;接着就是正式的软件安装了。输入命令：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt install vim vim-youcompleteme
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;命令执行过程中会提示是否安装。输入y后回车确定。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置vim&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里只推荐添加行号。输入命令：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+vim .vimrc
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;命令打开vim编辑器，编辑的对象是新文件.vimrc。
+vim是常用的命令行编辑器，也是最好的编辑器之一。按i进入插入模式，输入&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+set number
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;然后按Esc键退出模式。在vim编辑器中，输入&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+:wq
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;保存退出。&lt;/p&gt;
+
+&lt;p&gt;vim的显著特征是所谓的&lt;em&gt;模式&lt;/em&gt;。
+进入vim时，程序处于命令模式，
+这时输入并不被解释为文本的一部分，
+而是解释为对vim编辑器的命令。
+按下i可以切换到插入模式。
+此时vim编辑器的左下角会显示&lt;code class=&quot;highlighter-rouge&quot;&gt;-- INSERT --&lt;/code&gt;。
+只有在插入模式下vim才能像普通编辑器一样使用。
+要退出插入模式，只需要按下Esc。
+这样的设计可以在命令模式下提供大量强大的快捷键和快捷键组合。&lt;/p&gt;
+
+&lt;p&gt;在.vimrc文件中添加的&lt;code class=&quot;highlighter-rouge&quot;&gt;set number&lt;/code&gt;可以使vim默认显示行号。打开vim，可以看到在左上角光标的左侧出现数字1，代表第一行。如果输入&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+set nonumber
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这时可以关闭行号显示。输入&lt;code class=&quot;highlighter-rouge&quot;&gt;:q&lt;/code&gt;退出vim。如果你不小心按i进入了插入模式而且输入了什么的话，vim编辑器会警告并且拒绝退出。此时需要输入&lt;code class=&quot;highlighter-rouge&quot;&gt;:q!&lt;/code&gt;以强制退出。&lt;/p&gt;
+
+&lt;p&gt;vim还可以有更多的自定义设置。如果你想了解更多东西的话，可以去搜索vim教程之类的。&lt;/p&gt;
+
+&lt;h4 id=&quot;windows-1&quot;&gt;其他windows&lt;/h4&gt;
+
+&lt;p&gt;对于其他windows，建议安装虚拟机。常用的虚拟机软件有virtualbox和VMware。这里以virtualbox为例。如果你想使用VMware，可以自行搜索VMware教程。&lt;/p&gt;
+
+&lt;p&gt;首先，从官网下载并安装virtualbox。这里给出参考下载地址：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;http://download.virtualbox.org/virtualbox/5.2.2/VirtualBox-5.2.2-119230-Win.exe&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;安装后打开程序，单击New以新建虚拟机。依次选择linux/ubuntu 64位，内存大小2048MB，创建新的虚拟硬盘，VDI磁盘映像，8GB，固定大小，然后等待执行完毕。&lt;/p&gt;
+
+&lt;p&gt;同时，需要下载linux安装镜像。这里只推荐Ubuntu，如果你想尝试其他的发行版也可以，但记得在创建虚拟机时选择对应的选项。Ubuntu最新的稳定版本是16.04，虽然最新版本号已经是17.10，但这个版本容易出现bug，而且保质期更短。同样给出参考下载地址：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;http://releases.ubuntu.com/16.04/ubuntu-16.04.3-desktop-amd64.iso&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;等待下载完成。下载完毕后，在virtualbox中选中之前新建的虚拟机，单击Setting。
+在setting中选择侧边栏的storage，选中光驱后在右侧的选项卡中选择加载光盘。
+这里选择你之前下载的光盘镜像。选好后，点击右下角的确定退出。&lt;/p&gt;
+
+&lt;p&gt;双击运行虚拟机，进入ubuntu的系统安装界面。安装系统的部分参考下面对Linux系统统的说明。最后，安装完毕之后记得回到setting，在同样的地方选择弹出虚拟光盘。&lt;/p&gt;
+
+&lt;h3 id=&quot;linux&quot;&gt;linux&lt;/h3&gt;
+
+&lt;p&gt;假如你已经安装好了linux,比如ubuntu发行版，那么只要参考上面针对bash on windows的教程即可。
+特别地，在安装vim部分，如果你想试试其他的编辑器，你也可以选择emacs：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt install emacs
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;emacs是最强大的编辑器，但同时也是配置起来最麻烦和学习起来最复杂的。
+这里没有emacs的教程，因为我不会用emacs。&lt;/p&gt;
+
+&lt;h4 id=&quot;linux-1&quot;&gt;刻录启动盘，以及安装linux&lt;/h4&gt;
+
+&lt;p&gt;如果你想安装linux，首先你需要确保有足够的硬盘空间。推荐安装在SSD上，
+因为linux并不需要太大的空间。
+如果有些犹豫，或者害怕自己会弄坏电脑以及原有的数据，请选择虚拟机。&lt;/p&gt;
+
+&lt;p&gt;…待续&lt;/p&gt;
+
+&lt;p&gt;&lt;span id=&quot;firstsample&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;第一个程序&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+//firstsample.c -- 第一个程序
+int main(void)
+{
+	int a = 1;
+	int b = 1;
+	return a + b;
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这是一个最简单的程序。计算机先加载函数main和常数1，然后调用函数main。
+main函数是一个简单的加法，它用常数1先初始化一个变量a，再初始化一个变量b，
+最后把二者相加，返回相加的结果。在bash下，可以用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;echo $?&lt;/code&gt;
+查看返回值：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$ ./firstsample&lt;br /&gt;
+$ echo $?&lt;br /&gt;
+2  &lt;br /&gt;
+$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1+1=2。这个程序完成了一次加法,仅此而已。你可以用vim编辑器输入代码,
+得到源代码文件firstsample.c，然后用&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+$ gcc firstsample.c -o firstsample
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;命令编译得到程序firstsample。&lt;/p&gt;
+
+&lt;p&gt;linux系统自带的编译器是gcc。如果提示找不到命令，使用
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt install gcc&lt;/code&gt;来安装gcc编译器。&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>焦躁不安</title>
-   <link href="http://localhost:4000/2017/11/23/%E7%83%A6%E8%BA%81%E4%B8%8D%E5%AE%89/"/>
+   <link href="http://lanyon.getpoole.com/2017/11/23/%E7%83%A6%E8%BA%81%E4%B8%8D%E5%AE%89/"/>
    <updated>2017-11-23T00:00:00+08:00</updated>
-   <id>http://localhost:4000/2017/11/23/烦躁不安</id>
-   <content type="html">&lt;p&gt;不知道行不行……&lt;/p&gt;
+   <id>http://lanyon.getpoole.com/2017/11/23/烦躁不安</id>
+   <content type="html">&lt;p&gt;不知道为什么，总是觉得静不下心来，许多想做的都没有完成。
+许多目标总是想快速解决，却忍受不了效率的缓慢。
+也许只是看不到成效所造成的焦躁，也可能是身心疲惫的缘故。
+有时会觉得什么都不想做，有时却觉得什么都亟待完成。&lt;/p&gt;
+
+&lt;p&gt;想睡一觉，但又害怕醒不过来。想抓住些什么，但又觉得什么都是假的，至少对自己而言。
+觉得自己什么都需要，想攫取一切；又觉得什么都可放弃，妄图超越一切。
+两种不同的力在心中撕扯，自己漠然旁观，知道两边都是深渊。
+但我找不到路；一切稳定的东西都被撕碎，一切路都被撕碎。
+我只能默默积蓄自己的力量，等待平衡的那一天。其他的作壁上观。&lt;/p&gt;
+
+&lt;p&gt;这些都没什么；既然不愿浪费时间，那么就去重新定义思考、言语与行为。&lt;/p&gt;
+
 </content>
  </entry>
  
  <entry>
    <title>测试</title>
-   <link href="http://localhost:4000/2017/11/21/%E6%B5%8B%E8%AF%95/"/>
+   <link href="http://lanyon.getpoole.com/2017/11/21/%E6%B5%8B%E8%AF%95/"/>
    <updated>2017-11-21T00:00:00+08:00</updated>
-   <id>http://localhost:4000/2017/11/21/测试</id>
+   <id>http://lanyon.getpoole.com/2017/11/21/测试</id>
    <content type="html">&lt;p&gt;博客的第一篇文章。这篇文章只是用来测试，顺便包含一些细碎的唠叨。&lt;/p&gt;
 
 &lt;p&gt;模板最后选择了lanyon；自己造模板浪费时间，又学不会什么有趣的东西。所有模板之间，lanyon应该是最简单的之一。更简单的还有poole；不过我觉得lanyon已经够好了。TeXt也不错；不过还是复杂。lanyon的最后一次更新是2015年；现在jekyll更新到3,lanyon甚至不能直接运行了；好在有人提了pull request，虽然作者@mdo似乎已经放弃维护，但至少可以参照着pull request中的改动自己手动解决。&lt;/p&gt;

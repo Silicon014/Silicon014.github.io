@@ -11,7 +11,7 @@
 
   <title>
     
-      测试 &middot; 赫映 's blog
+      使用git &middot; 赫映 's blog
     
   </title>
 
@@ -95,20 +95,115 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">测试</h1>
-  <span class="post-date">21 Nov 2017</span>
-  <p>博客的第一篇文章。这篇文章只是用来测试，顺便包含一些细碎的唠叨。</p>
+  <h1 class="post-title">使用git</h1>
+  <span class="post-date">07 Dec 2017</span>
+  <p>只是一份备忘录。</p>
 
-<p>模板最后选择了lanyon；自己造模板浪费时间，又学不会什么有趣的东西。所有模板之间，lanyon应该是最简单的之一。更简单的还有poole；不过我觉得lanyon已经够好了。TeXt也不错；不过还是复杂。lanyon的最后一次更新是2015年；现在jekyll更新到3,lanyon甚至不能直接运行了；好在有人提了pull request，虽然作者@mdo似乎已经放弃维护，但至少可以参照着pull request中的改动自己手动解决。</p>
+<p>1.配置用户名，邮箱等</p>
 
-<p>选择极简风格的原因是为了提醒自己写下的东西有多贫乏和苍白；相对于周围绚烂多彩的世界，文字永远是渺小的；再多的图片和颜色也无法提升文字本身。思想的伟大，灵魂的深邃，到底是对文字之卑微所作的无力辩白。唯一能改变文字的，只有将其编纂成书、成文；在图书馆中方能使语言高于万物。至于装饰只会对文字造成损害。</p>
+<blockquote>
+  <p>git config –global -e</p>
+</blockquote>
 
-<p>但那些非成文的符号怎么办？比如假设我想贴出一张思维导图，该怎么做？只是夹杂在文中，可以去学markdown和html语法；但如果我要做可以实时浏览的大规模导图怎么办？或者，实现类似thebrain一类的功能？在jekyll这样的静态博客引擎下没有什么好的解决办法，这些功能我想可以通过flask之类的动态框架解决。那么，就要去学习python和javascript。</p>
+<p>2.添加ssh-key</p>
 
-<p>我只会一点点C——也就是说，只是能看懂简单的C代码，甚至不一定会写。目前正在尝试学习数据结构与算法，顺便在学习中熟悉C。下一门语言我大概会选python——当然，不妨碍中途看看比如java之类的语法，还有一些和计算机原理、操作系统、计算机网络有关的书；甚至linux内核。数学也很重要；当然，学业也很重要。我还要备考，而别人认为我只要备考，想到这里就绝望。</p>
+<ul>
+  <li>生成ssh-key</li>
+</ul>
 
-<p>vim切输入法实在麻烦。也许该试试emacs？或者实在不行用gedit也可以。</p>
+<blockquote>
+  <p>ssh-keygen -t rsa -C “yourname@email.com”
+然后按N次回车<br />
+- 当提示找不到命令时<br />
+&gt; pacman -S openssh</p>
+</blockquote>
 
+<ul>
+  <li>添加到github之类的</li>
+</ul>
+
+<blockquote>
+  <p>xsel -b &lt; .ssh/id_rsa.pub</p>
+</blockquote>
+
+<p>然后粘贴到<a href="https://github.com/settings/ssh/new">这里的</a>key一栏中，
+选择Add SSH key。</p>
+
+<p>3.新建仓库，添加文件和提交改动</p>
+
+<p>在文件夹下建立一个空的git仓库：</p>
+
+<blockquote>
+  <p>git init</p>
+</blockquote>
+
+<p>添加所有文件到git仓库：</p>
+
+<blockquote>
+  <p>git add –all<br />
+或者可以指定添加某个文件：
+&gt; git add &lt;文件名&gt;</p>
+</blockquote>
+
+<p>提交commit：</p>
+
+<blockquote>
+  <p>git commit -m “&lt;name&gt;”</p>
+</blockquote>
+
+<p>4.同步</p>
+
+<p>增添同步端：</p>
+
+<ul>
+  <li>在github上新建仓库：</li>
+</ul>
+
+<p>首先进入<a href="https://github.com/new">新建仓库</a>的页面，在Repository name下方输入
+你想为仓库取的名字，点击绿色的Create repository确定。确定后跳转至仓库页。</p>
+
+<ul>
+  <li>关联至本地仓库</li>
+</ul>
+
+<p>新建的仓库为空，按提示复制仓库的ssh路径。之后在本地仓库下输入</p>
+
+<blockquote>
+  <p>git remote add origin &lt;之前复制的ssh路径&gt;<br />
+输入错误时，用以下命令删除：<br />
+&gt; git remote remove origin</p>
+</blockquote>
+
+<ul>
+  <li>本地同步到github</li>
+</ul>
+
+<blockquote>
+  <p>git push origin master</p>
+</blockquote>
+
+<p>将把本地文件上传至github。</p>
+
+<ul>
+  <li>github同步到本地</li>
+</ul>
+
+<blockquote>
+  <p>git pull origin master</p>
+</blockquote>
+
+<p>将把github保存的文件下载到本地。</p>
+
+<p>5.下载仓库</p>
+
+<p>在github网站上的仓库页点击绿色的Clone or download，
+复制ssh路径，然后在保存各种项目的目录下输入</p>
+
+<blockquote>
+  <p>git clone &lt;复制的路径&gt;</p>
+</blockquote>
+
+<p>如果是别人的仓库，则在Clone or download弹出框的右上角点击use html选择复制html路径。</p>
 
 </div>
 

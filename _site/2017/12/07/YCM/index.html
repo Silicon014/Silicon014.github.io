@@ -11,7 +11,7 @@
 
   <title>
     
-      测试 &middot; 赫映 's blog
+      YCM &middot; 赫映 's blog
     
   </title>
 
@@ -95,19 +95,53 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">测试</h1>
-  <span class="post-date">21 Nov 2017</span>
-  <p>博客的第一篇文章。这篇文章只是用来测试，顺便包含一些细碎的唠叨。</p>
+  <h1 class="post-title">YCM</h1>
+  <span class="post-date">07 Dec 2017</span>
+  <p>YouCompleteMe这个插件，想想还是不装算了。代码补全虽然实用，但并没有很大的必要。我又不是记不住函数名之类的人。另外，那个选项框太难看，在vim中跳出一个代码补全的选项框更是有一种莫名其妙的滑稽感。</p>
 
-<p>模板最后选择了lanyon；自己造模板浪费时间，又学不会什么有趣的东西。所有模板之间，lanyon应该是最简单的之一。更简单的还有poole；不过我觉得lanyon已经够好了。TeXt也不错；不过还是复杂。lanyon的最后一次更新是2015年；现在jekyll更新到3,lanyon甚至不能直接运行了；好在有人提了pull request，虽然作者@mdo似乎已经放弃维护，但至少可以参照着pull request中的改动自己手动解决。</p>
+<p>所以我折腾了好一阵子YCM这个插件，最后还是没有用上。最多实际应用上了代码缩进而已。安装是一方面，配置和使用是另一方面。确实，手动编译之类很麻烦；但写配置文件更麻烦。而且绕了一圈，尝试了各种教程的方法后，我最后还是用的github上说明的方法，即python脚本自动编译。虽然我不打算用这个插件了，但好歹还是把安装方法整理一下吧。</p>
 
-<p>选择极简风格的原因是为了提醒自己写下的东西有多贫乏和苍白；相对于周围绚烂多彩的世界，文字永远是渺小的；再多的图片和颜色也无法提升文字本身。思想的伟大，灵魂的深邃，到底是对文字之卑微所作的无力辩白。唯一能改变文字的，只有将其编纂成书、成文；在图书馆中方能使语言高于万物。至于装饰只会对文字造成损害。</p>
+<h2 id="section">错误示范</h2>
 
-<p>但那些非成文的符号怎么办？比如假设我想贴出一张思维导图，该怎么做？只是夹杂在文中，可以去学markdown和html语法；但如果我要做可以实时浏览的大规模导图怎么办？或者，实现类似thebrain一类的功能？在jekyll这样的静态博客引擎下没有什么好的解决办法，这些功能我想可以通过flask之类的动态框架解决。那么，就要去学习python和javascript。</p>
+<p>首先我按照官方文档的说明，把项目clone到<code class="highlighter-rouge">~/.vim/bundle/</code>	下；接着检查并安装编译所需的软件：</p>
 
-<p>我只会一点点C——也就是说，只是能看懂简单的C代码，甚至不一定会写。目前正在尝试学习数据结构与算法，顺便在学习中熟悉C。下一门语言我大概会选python——当然，不妨碍中途看看比如java之类的语法，还有一些和计算机原理、操作系统、计算机网络有关的书；甚至linux内核。数学也很重要；当然，学业也很重要。我还要备考，而别人认为我只要备考，想到这里就绝望。</p>
+<p><code class="highlighter-rouge">
+sudo apt install build-essential cmake  
+sudo apt install python-dev python3-dev
+</code></p>
 
-<p>vim切输入法实在麻烦。也许该试试emacs？或者实在不行用gedit也可以。</p>
+<p>然后在目录<code class="highlighter-rouge">~/.vim/bundle/YouCompleteMe</code>下执行</p>
+
+<p><code class="highlighter-rouge">
+./install.py --clang-completer
+</code></p>
+
+<p>按照说明，这时就应该编译完毕了。但这时程序出现错误，执行卡在了</p>
+
+<blockquote>
+  <p>downloading clang 5.0<br />
+&gt; 大概是这样，记不清了</p>
+</blockquote>
+
+<p>这样的一行上，许久不见动静。我觉得可能是网络的原因——当然只是猜测。
+反正是，YouCompleteMe插件不能获取clang，因此也就无法成功编译安装。
+一开始我以为是系统没有安装合适的版本，于是用apt安装了clang 5。
+可是再次执行的时候还是在downloading clang 5.0停了下来。这一次，安装
+编译的过程没有彻底静止，下载在以1%，2%的速度几分钟几分钟地缓慢进行。
+不过，在我等了不知道多久之后，插件最终还是安装失败了。这一次，
+提示的不是缺少clang，而是缺少libclang这个库。</p>
+
+<p>如此反复。我又去装了libclang，结果还是downloading clang 5.0。</p>
+
+<h2 id="section-1">结果</h2>
+
+<p>最后的解决方法是在执行install.py时加上参数<code class="highlighter-rouge">--system-libclang --system-boost</code></p>
+
+<p><code class="highlighter-rouge">
+./install.py --clang-completer --system-libclang --system-boost
+</code></p>
+
+<p>然后就可以了。虽说不建议用系统自带的libclang库，但我这也是没办法之举。</p>
 
 
 </div>
